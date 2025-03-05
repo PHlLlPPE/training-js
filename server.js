@@ -26,5 +26,10 @@ const allowedOrigins = [
     origin: allowedOrigins,
     methods: ['GET', 'POST']
   }));
-  
+
+  const PORT = process.env.PORT || 5000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Serveur en écoute sur le port ${PORT}`);
+});
+
 });
