@@ -11,7 +11,6 @@ function App() {
     const [solutionRevealed, setSolutionRevealed] = useState(false);
     const [executionResult, setExecutionResult] = useState('');
 
-    // Charger un exercice aléatoire
     const fetchExercise = () => {
         setUserSolution('');
         setResult(null);
@@ -46,114 +45,50 @@ function App() {
         }
     };
 
-    const executeCode = () => {
-        if (!exercise) return;
-    
-        try {
-            // Extraction automatique du nom de la fonction utilisateur
-            const functionNameMatch = userSolution.match(/function\s+(\w+)\s*\(/);
-            
-            if (!functionNameMatch) {
-                setExecutionResult("Erreur : Impossible de détecter la fonction.");
-                return;
-            }
-    
-            const functionName = functionNameMatch[1]; // Récupère le nom de la fonction
-    
-            // Création d'une fonction dynamique pour exécuter le code
-            const func = new Function(`
-                "use strict";
-                ${userSolution}
-                return ${functionName}(${exercise.example.match(/\((.*?)\)/)[1]});
-            `);
-    
-            // Exécuter la fonction et afficher le résultat
-            const result = func();
-            setExecutionResult(result !== undefined ? result.toString() : "Aucune sortie");
-    
-        } catch (error) {
-            setExecutionResult(`Erreur : ${error.message}`);
-        }
-    };
-    
-    
-
     return (
         <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-6">
-            <div className="w-full max-w-3xl bg-gray-800 p-8 rounded-lg shadow-lg">
-                <h1 className="text-3xl font-bold text-center mb-4 text-red-400">🎯 Exercice de JavaScript</h1>
-                <h2 className="text-xl text-center mb-4">🏆 Score : <span className="text-yellow-400">{score}</span></h2>
+            <div className="w-full sm:w-11/12 md:w-3/4 lg:w-2/3 bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg">
+                <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 text-red-400">🎯 Exercice de JavaScript</h1>
+                <h2 className="text-lg sm:text-xl text-center mb-4">🏆 Score : <span className="text-yellow-400">{score}</span></h2>
 
                 {exercise ? (
                     <div>
                         <h2 className="text-2xl font-semibold">{exercise.title}</h2>
                         <p className="text-gray-300">{exercise.description}</p>
-                        <pre className="bg-gray-700 p-4 rounded-md mt-2">{exercise.example}</pre>
+                        <pre className="bg-gray-700 p-4 rounded-md mt-2 break-words overflow-x-auto">{exercise.example}</pre>
 
-                        {/* CodeMirror pour l'éditeur de code */}
                         <CodeMirror
                             value={userSolution}
                             extensions={[javascript()]}
                             theme={oneDark}
                             onChange={(value) => setUserSolution(value)}
-                            options={{
-                                mode: 'javascript',
-                                lineNumbers: true,
-                                tabSize: 2,
-                                indentWithTabs: false,
-                            }}
-                            className="mt-4 border border-gray-600 rounded-md"
+                            className="mt-4 w-full border border-gray-600 rounded-md overflow-x-auto"
                         />
 
-                        {/* Boutons d'action */}
-                        <div className="mt-4 flex justify-between">
-                            <button 
-                                onClick={handleSubmit} 
-                                className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white font-semibold transition-all"
-                            >
-                                ✅ Vérifier
-                            </button>
-                            <button 
-                                onClick={executeCode} 
-                                className="px-4 py-2 bg-green-500 hover:bg-green-600 rounded-md text-white font-semibold transition-all"
-                            >
-                                ▶ Exécuter
-                            </button>
-                            <button 
-                                onClick={fetchExercise} 
-                                className="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-md text-white font-semibold transition-all"
-                            >
-                                ⏭ Passer
-                            </button>
+                        <div className="mt-4 flex flex-col sm:flex-row sm:justify-between gap-2">
+                            <button onClick={handleSubmit} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white font-semibold transition-all">✅ Vérifier</button>
+                            <button onClick={fetchExercise} className="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-md text-white font-semibold transition-all">⏭ Passer</button>
                         </div>
 
-                        {/* Résultat de l'exécution */}
                         {executionResult && (
                             <div className="mt-4 p-4 bg-gray-700 text-green-400 rounded-md">
                                 <h3 className="font-semibold text-yellow-400">Résultat :</h3>
-                                <pre>{executionResult}</pre>
+                                <pre className="break-words overflow-x-auto">{executionResult}</pre>
                             </div>
                         )}
 
-                        {/* Résultat de la validation */}
                         {result && <p className="mt-4 text-lg font-bold">{result}</p>}
 
                         {!solutionRevealed && result === "❌ Mauvaise réponse, essaie encore !" && (
-                            <button 
-                                onClick={() => setSolutionRevealed(true)}
-                                className="mt-4 px-4 py-2 bg-red-500 hover:bg-red-600 rounded-md text-white font-semibold transition-all"
-                            >
-                                👀 Voir la solution
-                            </button>
+                            <button onClick={() => setSolutionRevealed(true)} className="mt-4 px-4 py-2 bg-red-500 hover:bg-red-600 rounded-md text-white font-semibold transition-all">👀 Voir la solution</button>
                         )}
 
-{solutionRevealed && (
-    <div className="mt-4 p-4 bg-gray-700 rounded-md">
-        <h3 className="font-semibold text-yellow-400">Solution :</h3>
-        <pre className="text-white font-mono text-lg">{exercise.solution}</pre>
-    </div>
-)}
-
+                        {solutionRevealed && (
+                            <div className="mt-4 p-4 bg-gray-700 rounded-md">
+                                <h3 className="font-semibold text-yellow-400">Solution :</h3>
+                                <pre className="text-white font-mono text-lg break-words overflow-x-auto">{exercise.solution}</pre>
+                            </div>
+                        )}
                     </div>
                 ) : (
                     <p className="text-center text-gray-400">Chargement...</p>
