@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "Écrire une fonction qui inverse une chaîne de caractères",
+        "description": "Écris une fonction qui prend une chaîne en entrée et retourne cette chaîne inversée.",
+        "example": "reverseString('hello') ➝ 'olleh'",
+        "solution": "function reverseString(str) { return str.split('').reverse().join(''); }"
+    },
+    {
+        "id": 2,
+        "title": "Trouver le plus grand nombre dans un tableau",
+        "description": "Écris une fonction qui prend un tableau de nombres et retourne le plus grand élément.",
+        "example": "findMax([3, 7, 2, 9, 1]) ➝ 9",
+        "solution": "function findMax(arr) { return Math.max(...arr); }"
+    },
+    {
+        "id": 3,
+        "title": "Vérifier si un mot est un palindrome",
+        "description": "Écris une fonction qui vérifie si un mot est un palindrome (se lit de la même manière dans les deux sens).",
+        "example": "isPalindrome('racecar') ➝ true",
+        "solution": "function isPalindrome(word) { return word === word.split('').reverse().join(''); }"
+    }
+]
