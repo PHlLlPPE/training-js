@@ -18,7 +18,7 @@ function App() {
         setExecutionResult('');
         setSolutionRevealed(false);
 
-        fetch('http://localhost:5000/api/exercises/random')
+        fetch('https://exo-js.philippe-gaulin.dev/api/exercises/random')
             .then(response => response.json())
             .then(data => setExercise(data))
             .catch(error => console.error("Erreur lors du chargement de l'exercice :", error));

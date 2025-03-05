@@ -16,8 +16,78 @@
     {
         "id": 3,
         "title": "Vérifier si un mot est un palindrome",
-        "description": "Écris une fonction qui vérifie si un mot est un palindrome (se lit de la même manière dans les deux sens).",
+        "description": "Écris une fonction qui vérifie si un mot est un palindrome.",
         "example": "isPalindrome('racecar') ➝ true",
         "solution": "function isPalindrome(word) { return word === word.split('').reverse().join(''); }"
+    },
+    {
+        "id": 4,
+        "title": "Calculer la somme des nombres d'un tableau",
+        "description": "Écris une fonction qui prend un tableau de nombres et retourne leur somme.",
+        "example": "sumArray([1, 2, 3, 4]) ➝ 10",
+        "solution": "function sumArray(arr) { return arr.reduce((acc, num) => acc + num, 0); }"
+    },
+    {
+        "id": 5,
+        "title": "Trouver le nombre de voyelles dans une chaîne",
+        "description": "Écris une fonction qui compte le nombre de voyelles (a, e, i, o, u) dans une chaîne.",
+        "example": "countVowels('hello') ➝ 2",
+        "solution": "function countVowels(str) { return (str.match(/[aeiou]/gi) || []).length; }"
+    },
+    {
+        "id": 6,
+        "title": "Trouver le facteur commun le plus élevé",
+        "description": "Écris une fonction qui retourne le plus grand diviseur commun de deux nombres.",
+        "example": "gcd(18, 24) ➝ 6",
+        "solution": "function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }"
+    },
+    {
+        "id": 7,
+        "title": "Générer une séquence de Fibonacci",
+        "description": "Écris une fonction qui retourne un tableau contenant les n premiers termes de Fibonacci.",
+        "example": "fibonacci(5) ➝ [0, 1, 1, 2, 3]",
+        "solution": "function fibonacci(n) { let seq = [0, 1]; for (let i = 2; i < n; i++) { seq.push(seq[i - 1] + seq[i - 2]); } return seq.slice(0, n); }"
+    },
+    {
+        "id": 8,
+        "title": "Vérifier si deux mots sont des anagrammes",
+        "description": "Écris une fonction qui vérifie si deux mots sont des anagrammes.",
+        "example": "isAnagram('listen', 'silent') ➝ true",
+        "solution": "function isAnagram(str1, str2) { return str1.split('').sort().join('') === str2.split('').sort().join(''); }"
+    },
+    {
+        "id": 9,
+        "title": "Compter les occurrences d'un caractère",
+        "description": "Écris une fonction qui retourne le nombre de fois qu'un caractère donné apparaît dans une chaîne.",
+        "example": "countChar('banana', 'a') ➝ 3",
+        "solution": "function countChar(str, char) { return str.split(char).length - 1; }"
+    },
+    {
+        "id": 10,
+        "title": "Convertir un nombre en binaire",
+        "description": "Écris une fonction qui convertit un nombre en binaire.",
+        "example": "toBinary(5) ➝ '101'",
+        "solution": "function toBinary(num) { return num.toString(2); }"
+    },
+    {
+        "id": 11,
+        "title": "Vérifier si un nombre est premier",
+        "description": "Écris une fonction qui vérifie si un nombre donné est premier.",
+        "example": "isPrime(7) ➝ true",
+        "solution": "function isPrime(n) { if (n < 2) return false; for (let i = 2; i <= Math.sqrt(n); i++) { if (n % i === 0) return false; } return true; }"
+    },
+    {
+        "id": 12,
+        "title": "Trouver les nombres premiers jusqu'à n",
+        "description": "Écris une fonction qui retourne tous les nombres premiers jusqu'à n.",
+        "example": "primeNumbers(10) ➝ [2, 3, 5, 7]",
+        "solution": "function primeNumbers(n) { let primes = []; for (let i = 2; i <= n; i++) { if (isPrime(i)) primes.push(i); } return primes; }"
+    },
+    {
+        "id": 13,
+        "title": "Remplacer les espaces par '%20'",
+        "description": "Écris une fonction qui remplace tous les espaces d'une chaîne par '%20'.",
+        "example": "urlify('hello world') ➝ 'hello%20world'",
+        "solution": "function urlify(str) { return str.replace(/ /g, '%20'); }"
     }
 ]
