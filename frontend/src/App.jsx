@@ -29,7 +29,7 @@ function App() {
     }, []);
 
     const handleSubmit = async () => {
-        const response = await fetch('http://localhost:5000/api/exercises/check', {
+        const response = await fetch('https://exo-js.philippe-gaulin.dev/api/exercises/check', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: exercise.id, userSolution })
