@@ -45,6 +45,33 @@ function App() {
         }
     };
 
+    const executeCode = () => {
+        if (!exercise) return;
+    
+        try {
+            const functionNameMatch = userSolution.match(/function\s+(\w+)\s*\(/);
+            
+            if (!functionNameMatch) {
+                setExecutionResult("Erreur : Impossible de détecter la fonction.");
+                return;
+            }
+    
+            const functionName = functionNameMatch[1];
+    
+            const func = new Function(`
+                "use strict";
+                ${userSolution}
+                return ${functionName}(${exercise.example.match(/\((.*?)\)/)[1]});
+            `);
+    
+            const result = func();
+            setExecutionResult(result !== undefined ? result.toString() : "Aucune sortie");
+    
+        } catch (error) {
+            setExecutionResult(`Erreur : ${error.message}`);
+        }
+    };
+    
     return (
         <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-6">
             <div className="w-full sm:w-11/12 md:w-3/4 lg:w-2/3 bg-gray-800 p-6 sm:p-8 rounded-lg shadow-lg">
@@ -67,6 +94,7 @@ function App() {
 
                         <div className="mt-4 flex flex-col sm:flex-row sm:justify-between gap-2">
                             <button onClick={handleSubmit} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white font-semibold transition-all">✅ Vérifier</button>
+                            <button onClick={executeCode} className="px-4 py-2 bg-green-500 hover:bg-green-600 rounded-md text-white font-semibold transition-all">▶ Exécuter</button>
                             <button onClick={fetchExercise} className="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-md text-white font-semibold transition-all">⏭ Passer</button>
                         </div>
 
