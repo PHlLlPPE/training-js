@@ -8,8 +8,15 @@ export default defineConfig({
     tailwindcss(),
   ],
   server: {
-    host: '0.0.0.0',
-    port: 5173
+    host: '0.0.0.0', // Permet d'écouter toutes les IPs
+    port: 5173,
+    strictPort: true, // Force l'utilisation du port défini
+    cors: true, // Active CORS
+    allowedHosts: ['exo-js.philippe-gaulin.dev'] // 🔥 Autorise ton domaine !
+  },
+  preview: {
+    port: 4173,
+    strictPort: true
   }
   
 })
