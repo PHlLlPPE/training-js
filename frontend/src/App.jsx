@@ -114,7 +114,19 @@ function App() {
                         {solutionRevealed && (
                             <div className="mt-4 p-4 bg-gray-700 rounded-md">
                                 <h3 className="font-semibold text-yellow-400">Solution :</h3>
-                                <pre className="text-white font-mono text-lg break-words overflow-x-auto">{exercise.solution}</pre>
+                                <CodeMirror
+                                    value={exercise.solution}
+                                    extensions={[javascript()]}
+                                    theme={oneDark}
+                                    options={{
+                                        mode: 'javascript',
+                                        lineNumbers: true,
+                                        tabSize: 2,
+                                        indentWithTabs: false,
+                                        readOnly: true,
+                                    }}
+                                    className="mt-2 w-full border border-gray-600 rounded-md overflow-x-auto"
+                                />
                             </div>
                         )}
                     </div>
