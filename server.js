@@ -16,4 +16,15 @@ app.listen(PORT, () => {
 const exercisesRoutes = require('./routes/exercises');
 app.use('/api/exercises', exercisesRoutes);
 
+
+const allowedOrigins = [
+    'https://exo-js.philippe-gaulin.dev',
+    'http://localhost:5173' // Pour le développement
+  ];
+  
+  app.use(cors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST']
+  }));
+  
 });
