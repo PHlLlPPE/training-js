@@ -42,44 +42,62 @@ function App() {
     };
 
     return (
-        <div>
-            <h1>Exercice de JavaScript</h1>
-            <h2>Score : {score} 🏆</h2>
+        <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-6">
+            <div className="w-full max-w-3xl bg-gray-800 p-8 rounded-lg shadow-lg">
+                <h1 className="text-3xl font-bold text-center mb-4 text-red-400">🎯 Exercice de JavaScript</h1>
+                <h2 className="text-xl text-center mb-4">🏆 Score : <span className="text-yellow-400">{score}</span></h2>
 
-            {exercise ? (
-                <div>
-                    <h2>{exercise.title}</h2>
-                    <p>{exercise.description}</p>
-                    <pre>{exercise.example}</pre>
+                {exercise ? (
+                    <div>
+                        <h2 className="text-2xl font-semibold">{exercise.title}</h2>
+                        <p className="text-gray-300">{exercise.description}</p>
+                        <pre className="bg-gray-700 p-4 rounded-md mt-2">{exercise.example}</pre>
 
-                    <textarea
-                        rows="5"
-                        cols="50"
-                        value={userSolution}
-                        onChange={(e) => setUserSolution(e.target.value)}
-                        placeholder="Écris ta solution ici..."
-                    />
-                    <br />
-
-                    <button onClick={handleSubmit}>Vérifier</button>
-                    <button onClick={fetchExercise} style={{ marginLeft: "10px" }}>⏭ Passer</button>
-
-                    {result && <p>{result}</p>}
-
-                    {!solutionRevealed && result === "❌ Mauvaise réponse, essaie encore !" && (
-                        <button onClick={() => setSolutionRevealed(true)}>Voir la solution</button>
-                    )}
-
-                    {solutionRevealed && (
-                        <div>
-                            <h3>Solution :</h3>
-                            <pre>{exercise.solution}</pre>
+                        <textarea
+                            className="w-full p-3 mt-4 bg-gray-700 text-white border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            rows="5"
+                            value={userSolution}
+                            onChange={(e) => setUserSolution(e.target.value)}
+                            placeholder="Écris ta solution ici..."
+                        />
+                        
+                        <div className="mt-4 flex justify-between">
+                            <button 
+                                onClick={handleSubmit} 
+                                className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md text-white font-semibold transition-all"
+                            >
+                                ✅ Vérifier
+                            </button>
+                            <button 
+                                onClick={fetchExercise} 
+                                className="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-md text-white font-semibold transition-all"
+                            >
+                                ⏭ Passer
+                            </button>
                         </div>
-                    )}
-                </div>
-            ) : (
-                <p>Chargement...</p>
-            )}
+
+                        {result && <p className="mt-4 text-lg font-bold">{result}</p>}
+
+                        {!solutionRevealed && result === "❌ Mauvaise réponse, essaie encore !" && (
+                            <button 
+                                onClick={() => setSolutionRevealed(true)}
+                                className="mt-4 px-4 py-2 bg-red-500 hover:bg-red-600 rounded-md text-white font-semibold transition-all"
+                            >
+                                👀 Voir la solution
+                            </button>
+                        )}
+
+                        {solutionRevealed && (
+                            <div className="mt-4 p-4 bg-gray-700 rounded-md">
+                                <h3 className="font-semibold text-yellow-400">Solution :</h3>
+                                <pre className="text-green-400">{exercise.solution}</pre>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <p className="text-center text-gray-400">Chargement...</p>
+                )}
+            </div>
         </div>
     );
 }
