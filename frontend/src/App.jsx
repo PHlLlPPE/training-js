@@ -147,12 +147,13 @@ function App() {
                             </button>
                         )}
 
-                        {solutionRevealed && (
-                            <div className="mt-4 p-4 bg-gray-700 rounded-md">
-                                <h3 className="font-semibold text-yellow-400">Solution :</h3>
-                                <pre className="text-green-400">{exercise.solution}</pre>
-                            </div>
-                        )}
+{solutionRevealed && (
+    <div className="mt-4 p-4 bg-gray-700 rounded-md">
+        <h3 className="font-semibold text-yellow-400">Solution :</h3>
+        <pre className="text-white font-mono text-lg">{exercise.solution}</pre>
+    </div>
+)}
+
                     </div>
                 ) : (
                     <p className="text-center text-gray-400">Chargement...</p>
